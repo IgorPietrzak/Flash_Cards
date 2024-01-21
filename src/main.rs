@@ -13,19 +13,24 @@ fn main() {
 
 
 fn run(mut files: Vec<String>) {
+    let number_of_cards = files.len();
+    let mut completed = 0;
 
     loop {
 
         if files.len() < 1 {
             break;
         }
-        
+        println!("----------------------");
+        println!("🦍 Completed {}/{} ✅",completed,number_of_cards);
+        println!("----------------------");
+ 
         let index = rand::thread_rng().gen_range(0..=files.len() -1);
 
         let current_file = &files[index];
 
         let file_name = &current_file.to_string()[6..];
-        println!("{}", file_name);
+        println!("🟠: {}", file_name);
 
 
         let mut input = String::new();
@@ -33,6 +38,11 @@ fn run(mut files: Vec<String>) {
         std::io::stdin()
             .read_line(&mut input)
             .expect("Failed to read line");
+
+        if input.trim() == "s" {
+            completed += 1;
+            continue;
+        }
 
         cards::open_file(String::from(current_file));
 
@@ -45,6 +55,7 @@ fn run(mut files: Vec<String>) {
         }
 
         files.remove(index);
+        completed += 1;
         
 
     }

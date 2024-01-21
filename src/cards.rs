@@ -30,22 +30,3 @@ pub fn open_file(file_path: String) {
 }
 
 
-/* 
- let file_path = "path/to/your/file.txt";
-
-    // Open the file
-    let _file = File::open(file_path)?;
-
-    // If you only want to open the file without doing anything with it in Rust
-    // and let the operating system open it with the default application,
-    // you can use the `open` command on macOS.
-    #[cfg(target_os = "macos")]
-    {
-        Command::new("open")
-            .arg(file_path)
-            .spawn()
-            .expect("Failed to open file");
-    }
-
-    Ok(())
- * */

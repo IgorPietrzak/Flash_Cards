@@ -1,6 +1,6 @@
 use std::error::Error;
 use std::fs::{self};
-use std::path::{PathBuf};
+use std::path::PathBuf;
 use std::process::Command;
 
 pub fn get_files(path: &str) -> Result<Vec<String>, Box<dyn Error>> {
@@ -18,15 +18,14 @@ pub fn get_files(path: &str) -> Result<Vec<String>, Box<dyn Error>> {
 }
 
 pub fn open_file(file_path: String) {
-
-    #[cfg(target_os = "macos")]
-        {
-            Command::new("open")
-                .arg(file_path)
-                .spawn()
-                .expect("Failed to open file");
-        }
-    
+    _ = Command::new("xdg-open").arg(&file_path).spawn(); // Use spawn to run the command asynchronously
 }
 
-
+#[cfg(test)]
+mod test {
+    use super::open_file;
+    #[test]
+    fn test_img() {
+        open_file("/home/igor/code/rust/Flash_Cards/cards/1029684.jpg".to_string());
+    }
+}
